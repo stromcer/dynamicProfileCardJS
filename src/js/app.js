@@ -26,21 +26,59 @@ function render(variables = {}) {
   console.log("These are the current variables: ", variables); //print on the console
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
-  let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
-  if (variables.includeCover == false) cover = "<div class='cover'></div>";
+  // let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
+  // if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  let name = variables.name ? `${variables.name}` : "Name";
+  let lastname = variables.lastname ? `${variables.lastname}` : `Lastname`;
+  let socialPosition =
+    variables.socialMediaPosition == "position-right"
+      ? `position-right`
+      : `position-left`;
+  let role = variables.roles ? `${variables.role}` : `Job role`;
+  let city = variables.city ? `${variables.city}` : `City`;
+  let country = variables.country ? `${variables.country}` : `Country`;
+  let twitter = variables.twitter
+    ? `<li><a href="https://twitter.com/${variables.twitter}"><i class="fab fa-twitter"></i></a></li>`
+    : ``;
+  let github = variables.github
+    ? `<li><a href="https://github.com/${variables.github}"><i class="fab fa-github"></i></a></li>`
+    : ``;
+  let linkedin = variables.linkedin
+    ? `<li><a href="https://linkedin.com/${variables.linkedin}"><i class="fab fa-linkedin"></i></a></li>`
+    : ``;
+  let instagram = variables.instagram
+    ? `<li><a href="https://instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a></li>`
+    : ``;
+  let email = variables.email
+    ? `<h1 class="btn btn-primary "><a class="mailtoui text-dark" href="mailto:${variables.email}"><i class="far fa-envelope"></i></h1>`
+    : ``;
+
+  let backCustomUrl = variables.customUrl
+    ? `${variables.customUrl}`
+    : `${variables.background}`;
+
+  let cover = variables.includeCover
+    ? `<div class="cover"><img src="${variables.background}" /></div>`
+    : `<div class="cover"><img src="${backCustomUrl}" /></div>`;
+
+  let background = variables.includeCover
+    ? `<img src="${variables.avatarURL}" class="photo" />`
+    : `<img src="${variables.avatarURL}" class="photo" />`;
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          <h1>${name} ${lastname}</h1>
+          <h2>${role}</h2>
+          <h3>${city}, ${country}</h3>
+          ${email}
+          <ul class="${socialPosition}">
+            ${twitter}
+            ${github}
+            ${linkedin}
+            ${instagram}
+            
           </ul>
         </div>
     `;
@@ -68,7 +106,8 @@ window.onload = function() {
     lastname: null,
     role: null,
     country: null,
-    city: null
+    city: null,
+    email: null
   };
   render(window.variables); //render the card for the first time
 
