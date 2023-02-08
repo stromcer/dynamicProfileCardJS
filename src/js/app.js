@@ -51,24 +51,25 @@ function render(variables = {}) {
     ? `<li><a href="https://instagram.com/${variables.instagram}"><i class="fab fa-instagram"></i></a></li>`
     : ``;
   let email = variables.email
-    ? `<h1 class="btn btn-primary "><a class="mailtoui text-dark" href="mailto:${variables.email}"><i class="far fa-envelope"></i></h1>`
+    ? `<h3 class="btn btn-primary "><a class="mailtoui text-dark" href="mailto:${variables.email}"><i class="far fa-envelope"></i></h3>`
     : ``;
 
-  let backCustomUrl = variables.customUrl
-    ? `${variables.customUrl}`
+  let backCustomUrl = variables.customBackgroundUrl
+    ? `${variables.customBackgroundUrl}`
     : `${variables.background}`;
 
   let cover = variables.includeCover
-    ? `<div class="cover"><img src="${variables.background}" /></div>`
-    : `<div class="cover"><img src="${backCustomUrl}" /></div>`;
+    ? `<div class="cover"><img src="${backCustomUrl}" /></div>`
+    : `<div class="cover"></div>`;
 
-  let background = variables.includeCover
-    ? `<img src="${variables.avatarURL}" class="photo" />`
-    : `<img src="${variables.avatarURL}" class="photo" />`;
+  let avatar = variables.customAvatarUrl
+    ? `${variables.customAvatarUrl}`
+    : `${variables.avatarURL}`;
+
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
-            ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
+          <button data-bs-toggle="modal" data-bs-target="#backgroundModal" class="btn p-0">${cover}</button>
+          <button data-bs-toggle="modal" data-bs-target="#avatarModal" class="bg-transparent border-0"><img src="${avatar}" class="photo" /></button>
           <h1>${name} ${lastname}</h1>
           <h2>${role}</h2>
           <h3>${city}, ${country}</h3>
@@ -99,7 +100,7 @@ window.onload = function() {
     socialMediaPosition: "position-left",
     // social media usernames
     twitter: null,
-    github: "alesanchezr",
+    github: null,
     linkedin: null,
     instagram: null,
     name: null,
@@ -107,7 +108,9 @@ window.onload = function() {
     role: null,
     country: null,
     city: null,
-    email: null
+    email: null,
+    customBackgroundUrl: null,
+    customAvatarUrl: null
   };
   render(window.variables); //render the card for the first time
 
