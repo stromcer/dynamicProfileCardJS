@@ -35,7 +35,7 @@ function render(variables = {}) {
     variables.socialMediaPosition == "position-right"
       ? `position-right`
       : `position-left`;
-  let role = variables.roles ? `${variables.role}` : `Job role`;
+  let role = variables.role ? `${variables.role}` : `Job role`;
   let city = variables.city ? `${variables.city}` : `City`;
   let country = variables.country ? `${variables.country}` : `Country`;
   let twitter = variables.twitter
